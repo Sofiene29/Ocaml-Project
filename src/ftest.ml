@@ -1,4 +1,6 @@
 open Gfile
+open Tools
+open Fulkerson
 
 let () =
 
@@ -23,8 +25,19 @@ let () =
   (* Open file *)
   let graph = from_file infile in
 
+  let graph = gmap graph (fun x-> int_of_string x) in
+
+  let graph = fulkerson graph 0 5 in
+
+  let graph = gmap graph (fun x-> string_of_int x) in
+
   (* Rewrite the graph that has been read. *)
   let () = write_file outfile graph in
-
+  let()=export "/home/benyahia/4 IR/ProjectOCaml/ocaml-maxflow-project/graphs/outfile.dot" graph in  
   ()
+
+
+
+  (*dot -Tsvg outfile > outfile.svg
+	eom outfile.svg*)
 
