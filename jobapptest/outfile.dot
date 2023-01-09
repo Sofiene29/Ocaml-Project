@@ -1,0 +1,23 @@
+digraph finite_state_machine {
+
+ 
+  fontname="Helvetica,Arial,sans-serif"
+  node [fontname="Helvetica,Arial,sans-serif"]
+  edge [fontname="Helvetica,Arial,sans-serif"]
+  rankdir=LR; 
+ 
+node [shape = doublecircle];5 50 10011 10099 20011 20099 30011 30099 ; 
+ node [shape = circle]; 
+5 -> 10099 [label ="1"]  ;
+5 -> 20099 [label ="1"]  ;
+5 -> 30099 [label ="1"]  ;
+10099 -> 20011 [label ="1"]  ;
+20011 -> 50 [label ="1"]  ;
+20099 -> 30011 [label ="1"]  ;
+30011 -> 50 [label ="1"]  ;
+10011 -> 10099 [label ="1"]  ;
+10011 -> 20099 [label ="1"]  ;
+10011 -> 50 [label ="1"]  ;
+30099 -> 10011 [label ="1"]  ;
+
+ }
