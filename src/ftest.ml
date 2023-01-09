@@ -32,7 +32,7 @@ let () =
   in
 
 
-  let matrix1= [[1;1;1];[1;0;0];[0;0;0]] in
+  let matrix1= [[1;1;1];[1;0;0];[0;1;0]] in
 
   let g = generate_apps matrix1 in 
   
