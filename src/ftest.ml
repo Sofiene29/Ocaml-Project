@@ -1,4 +1,5 @@
 open Gfile
+open Jfile
 open Tools
 open Fulkerson
 open Jobapp 
@@ -10,10 +11,20 @@ let rec print_tuples =
     Printf.printf " \n applicant: %d assigned job: %d; \n " (a/10000) (b/10000);
     print_tuples rest
 
+let rec print_tuples2 =
+  function
+  | [] -> ()
+  | (a, b) :: rest ->
+    Printf.printf " \n App :  %s wants jobs " a ; List.iter (Printf.printf "%s  -  ") b ;
+    print_tuples2 rest
+
+
+
+let rec print_input_file (j,a)= List.iter (Printf.printf "%s  -  ") j ; print_tuples2 a
 
 let () =
   (* Check the number of command-line arguments *)
-  if Array.length Sys.argv <> 5 then
+  if Array.length Sys.argv <> 3 then
     begin
       Printf.printf "\nUsage: %s infile source sink outfile\n\n%!" Sys.argv.(0) ;
       exit 0
@@ -21,16 +32,15 @@ let () =
 
 
 
-  (* Arguments are : infile(1) source-id(2) sink-id(3) outfile(4) *)
+  (* Arguments are : infile(1) outfile(2) *)
 
   let infile = Sys.argv.(1)
-  and outfile = Sys.argv.(4)
+  and outfile = Sys.argv.(2)
 
-  (* These command-line arguments are not used for the moment. *)
-  and _source = int_of_string Sys.argv.(2)
-  and _sink = int_of_string Sys.argv.(3)
   in
 
+  let input = Jfile.from_file infile in 
+  let () = print_input_file input in
 
   let matrix1= [[1;1;1];[1;0;0];[0;1;0]] in
 

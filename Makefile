@@ -10,8 +10,7 @@ edit:
 	code . -n
 
 demo: build
-	@echo "\n==== EXECUTING ====\n"
-	./ftest.native graphs/graph1 1 2 outfile
+	./ftest.native jobapptest/data_test outfile
 	
 clean:
 	-rm -rf _build/

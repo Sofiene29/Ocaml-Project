@@ -6,8 +6,10 @@ type idJob = int
 type idApp = int
 type intrested = int
 
+
 (*matrix applicant*job -> m[a,j] == a interested or not in j *)
 type jobAppli= intrested list list 
+
 
 (*takes the Applicants matrix and generates the Applicant nodes*)
 val generate_apps: jobAppli -> 'b Graph.graph
