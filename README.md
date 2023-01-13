@@ -26,7 +26,7 @@ In order to practice further our knowledge in functional programming, we were in
 
 * The input data test file is `graphs/graph`. `ftest22.ml` contains the code testing the input.
 * To launch the test, type the `make demo2` in the command line.
-* To view the results, `graphs/outfile.dot` is generated automatically to view the output.
+* To view the results, `graphs/outfile.dot` is generated automatically with the resulting output graph.
 
 
 ## 2. Bippartite-Matching : Assign jobs to applicants according to their preferences
