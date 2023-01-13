@@ -4,10 +4,43 @@ open Graph
 type idJob = int 
 (*APPLICANT = i*10000+11*)
 type idApp = int
+
 type intrested = int
 
 (*matrix applicant*job -> m[a,j] == a interested or not in j *)
 type jobAppli= intrested list list 
+
+(*Get the job given its id*)
+let get_job_by_id id jobs = List.nth (List. rev jobs) ((id/10000)-1)
+
+(*Get the job given its position*)
+let get_job_by_pos id jobs = List.nth (List. rev jobs) id
+
+(*Get the applicant's name given its id*)
+let get_app_by_id id apps = List.nth apps ((id/10000)-1)
+
+
+(*builds matrix*)
+let build_matrix (jobs,apps) = 
+  let rec loop acu = function
+    | [] -> acu
+    | (_,intrested)::xs -> loop ((List.map (fun x-> int_of_string x) intrested)::acu) xs
+  in loop [] apps
+
+(*Read Matrix : Which applicant wants which jobs*)
+
+let read_interest (a,interested) all_jobs =
+  let rec loop acu cmp = function
+    | [] -> acu
+    | j::js -> if (j="1") then loop ((get_job_by_pos cmp all_jobs ) ::acu)  (cmp+1) js else loop acu (cmp+1) js
+  in (a,loop [] 0 interested)  
+
+let read_jobapp (jobs,apps) = 
+  let rec loop acu = function 
+   | [] -> acu 
+   | a::xs -> loop ((read_interest a jobs)::acu) xs
+  in loop [] apps
+
 
 (*takes the Applicants matrix and generates the Applicant nodes*)
 let generate_apps ma =
@@ -50,3 +83,13 @@ let to_graph_capa gr s p = n_fold gr (fun acu n -> if ((n mod 10000 )= 11) then 
 (*Analyzes ford fulkerson graph in order to associate each applicant to his job*)
 let affectation gr_max = e_fold gr_max (fun acu job app a-> if((job mod 10000=99)&&(app mod 10000=11)) then (app,job)::acu else acu) []
   
+
+(*Demonstrate Affectation*)
+let demo_affectation affectations (jobs,apps) = List.map (fun (app,job) -> ( get_app_by_id app apps,get_job_by_id job jobs) ) affectations
+
+(*get applicants*)
+let get_apps apps = 
+  let rec loop acu = function
+    |  [] -> acu
+    | (x,_)::xs -> loop (x::acu) xs
+  in loop [] apps  

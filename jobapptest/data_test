@@ -1,0 +1,16 @@
+% This is data_test
+
+j Ingénieur
+j Professeur
+j Astronaute
+j Infirmier
+j Pharmacien
+j Pompier
+
+a John 1-0-0-0-0-0 
+a Amelie 1-0-0-0-1-0
+a Sophia 1-0-1-1-0-0
+a Bob 0-1-0-0-0-1
+a Jack 0-0-1-0-0-0
+
+% End of data_test 

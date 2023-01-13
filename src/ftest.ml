@@ -4,23 +4,39 @@ open Tools
 open Fulkerson
 open Jobapp 
 
-let rec print_tuples =
-  function
-  | [] -> ()
-  | (a, b) :: rest ->
-    Printf.printf " \n applicant: %d assigned job: %d; \n " (a/10000) (b/10000);
-    print_tuples rest
 
+(************************************************)
+(************************************************)
+(************************************************)
+(*USEFUL FUNCTIONS FOR PRINTING TESTS*)
+
+
+(* PRINT TUPLE of : (applicant_name * [ list of jobs he/she wants ]) *)
 let rec print_tuples2 =
   function
   | [] -> ()
   | (a, b) :: rest ->
-    Printf.printf " \n App :  %s wants jobs " a ; List.iter (Printf.printf "%s  -  ") b ;
+    Printf.printf " \n App :  %s     Wants jobs : " a ; List.iter (Printf.printf "%s ") b ;
     print_tuples2 rest
 
+(* PRINT TUPLE of : (applicant_name * Job Assigned to him/her ) *)
+let rec print_tuples3 =
+  function
+  | [] -> ()
+  | (a, b) :: rest ->
+    Printf.printf "Applicant : %s || Assigned job : %s; \n" a b;
+    print_tuples3 rest
 
-
+(*PRINT : INPUT FILE*)
 let rec print_input_file (j,a)= List.iter (Printf.printf "%s  -  ") j ; print_tuples2 a
+
+
+
+(************************************************)
+(************************************************)
+(************************************************)
+(*TEST STARTS HERE*)
+
 
 let () =
   (* Check the number of command-line arguments *)
@@ -30,8 +46,6 @@ let () =
       exit 0
     end ;
 
-
-
   (* Arguments are : infile(1) outfile(2) *)
 
   let infile = Sys.argv.(1)
@@ -39,26 +53,44 @@ let () =
 
   in
 
+  (*READ INPUT FILE*)
   let input = Jfile.from_file infile in 
-  let () = print_input_file input in
 
-  let matrix1= [[1;1;1];[1;0;0];[0;1;0]] in
+  let () = Printf.printf "\n________________________________\n" in
+  let () = Printf.printf "**READ INPUT**\n________________________________\n\n" in
+  let l = read_jobapp input in
+  let () = print_tuples2 l in
+  let () = Printf.printf "\n________________________________\n" in
+  let () = Printf.printf "\n\n" in
 
-  let g = generate_apps matrix1 in 
+
+  (*DATA PROCESSING*)
+  let matrix0 = build_matrix input in
+
+  let g = generate_apps matrix0 in 
   
-  let g=generate_jobs matrix1 g in
+  let g=generate_jobs matrix0 g in
 
-  let g= to_graph matrix1 g in
+  let g= to_graph matrix0 g in
   
   let g= to_graph_capa g 50 05 in 
 
   let g=fulkerson g 50 05 in
 
   let res=affectation g in 
-  let () = print_tuples res in
 
+
+  (*TEST AFFECTATION*)
+  let res = demo_affectation res (fst input, get_apps (snd input) ) in
+
+  let () = Printf.printf "\n________________________________\n" in
+  let () = Printf.printf "**READ OUTPUT**\n________________________________\n" in
+  let () = print_tuples3 res in
+  let () = Printf.printf "\n________________________________\n" in
+  let () = Printf.printf "\n\n" in
+
+  (*FOLLOW UP GRAPH*)
   let g = gmap g (fun x-> string_of_int x) in
-
 
 
   (* Rewrite the graph that has been read. *)
@@ -66,4 +98,7 @@ let () =
   let()=export "/home/benyahia/4 IR/ProjectOCaml/ocaml-maxflow-project/jobapptest/outfile.dot" g in  
   ()
 
-  
+
+
+(************************************************)
+(************************************************)
