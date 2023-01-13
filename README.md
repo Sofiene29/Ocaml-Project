@@ -5,13 +5,6 @@ In order to practice further our knowledge in functional programming, we were in
 1. **The base project** : Defining data structures and functions to illustrate the Ford fulkerson Algorithm.
 2. **The medium project** : An application to one of the main uses of the algorithm called *Bippartite-Matching*. **Assign jobs to applicants according to their preferences** 
 
-
-How to setup
-
-Copy-pastable quick start code example
-
-Recommended citation
-
 # Setup and Test
 
 * To use, you should install the *OCaml* extension in VSCode. Other extensions might work as well but make sure there is only one installed.
