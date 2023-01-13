@@ -16,7 +16,7 @@ let rec print_tuples2 =
   function
   | [] -> ()
   | (a, b) :: rest ->
-    Printf.printf " \n App :  %s     Wants jobs : " a ; List.iter (Printf.printf "%s ") b ;
+    Printf.printf " \n  Applicant :  %s   || Wants jobs : " a ; List.iter (Printf.printf "%s ") b ;
     print_tuples2 rest
 
 (* PRINT TUPLE of : (applicant_name * Job Assigned to him/her ) *)
@@ -24,7 +24,7 @@ let rec print_tuples3 =
   function
   | [] -> ()
   | (a, b) :: rest ->
-    Printf.printf "Applicant : %s || Assigned job : %s; \n" a b;
+    Printf.printf "  Applicant : %s || Assigned job : %s; \n" a b;
     print_tuples3 rest
 
 (*PRINT : INPUT FILE*)

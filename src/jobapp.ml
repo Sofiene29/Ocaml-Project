@@ -1,7 +1,15 @@
 open Graph
 
+(**********************)
+(**********************)
+(*DATA TYPES*)
+(*used merely for processing the string data*)
+(**********************)
+(**********************)
+
 (*JOB = i*10000+99*)
 type idJob = int 
+
 (*APPLICANT = i*10000+11*)
 type idApp = int
 
@@ -10,17 +18,25 @@ type intrested = int
 (*matrix applicant*job -> m[a,j] == a interested or not in j *)
 type jobAppli= intrested list list 
 
+
+
+(**********************)
+(**********************)
+(*Functions*)
+(**********************)
+(**********************)
+
 (*Get the job given its id*)
 let get_job_by_id id jobs = List.nth (List. rev jobs) ((id/10000)-1)
 
 (*Get the job given its position*)
-let get_job_by_pos id jobs = List.nth (List. rev jobs) id
+let get_job_by_pos pos jobs = List.nth (List. rev jobs) pos
 
 (*Get the applicant's name given its id*)
 let get_app_by_id id apps = List.nth apps ((id/10000)-1)
 
 
-(*builds matrix*)
+(*Builds matrix*)
 let build_matrix (jobs,apps) = 
   let rec loop acu = function
     | [] -> acu
@@ -28,11 +44,10 @@ let build_matrix (jobs,apps) =
   in loop [] apps
 
 (*Read Matrix : Which applicant wants which jobs*)
-
 let read_interest (a,interested) all_jobs =
   let rec loop acu cmp = function
     | [] -> acu
-    | j::js -> if (j="1") then loop ((get_job_by_pos cmp all_jobs ) ::acu)  (cmp+1) js else loop acu (cmp+1) js
+    | j::js -> if (j="1") then loop ((get_job_by_pos cmp all_jobs ) :: acu)  (cmp+1) js else loop acu (cmp+1) js
   in (a,loop [] 0 interested)  
 
 let read_jobapp (jobs,apps) = 
@@ -40,7 +55,6 @@ let read_jobapp (jobs,apps) =
    | [] -> acu 
    | a::xs -> loop ((read_interest a jobs)::acu) xs
   in loop [] apps
-
 
 (*takes the Applicants matrix and generates the Applicant nodes*)
 let generate_apps ma =
