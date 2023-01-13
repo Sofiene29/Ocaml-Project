@@ -5,21 +5,6 @@ In order to practice further our knowledge in functional programming, we were in
 1. **The base project** : Defining data structures and functions to illustrate the Ford fulkerson Algorithm.
 2. **The medium project** : An application to one of the main uses of the algorithm called *Bippartite-Matching*. **Assign jobs to applicants according to their preferences** 
 
-# Setup and Test
-
-* To use, you should install the *OCaml* extension in VSCode. Other extensions might work as well but make sure there is only one installed.
-
-
-* A makefile is provided with some useful commands:
-    - `make build` to compile. This creates an ftest.native executable
-    - `make demo2` to run the `ftest22` program with some arguments
-    - `make demo` to run the `ftest` program with some arguments
-    - `make format` to indent the entire project
-    - `make edit` to open the project in VSCode
-    - `make clean` to remove build artifacts
-
-*In case of trouble with the VSCode extension (e.g. the project does not build, there are strange mistakes), a common workaround is to (1) close vscode, (2) `make clean`, (3) `make build` and (4) reopen vscode (`make edit`).*
-
 ## 1. Ford Fulkerson 
 
 > This algorithm is a powerful tool that calculates  the maximum flow in a flow network. The approach is to augmenting paths in a residual graph when this path is found.
@@ -48,4 +33,19 @@ In order to practice further our knowledge in functional programming, we were in
 > ==== TEST2 ==== -> is another basic test case with 6 jobs and 6 applicants.
 
 > ==== TEST3 ==== -> is a special test case with 6 jobs and 7 applicants who are interested in all jobs.
+
+# Setup and Test
+
+* To use, you should install the *OCaml* extension in VSCode. Other extensions might work as well but make sure there is only one installed.
+
+
+* A makefile is provided with some useful commands:
+    - `make build` to compile. This creates an ftest.native executable
+    - `make demo2` to run the `ftest22` program with some arguments
+    - `make demo` to run the `ftest` program with some arguments
+    - `make format` to indent the entire project
+    - `make edit` to open the project in VSCode
+    - `make clean` to remove build artifacts
+
+*In case of trouble with the VSCode extension (e.g. the project does not build, there are strange mistakes), a common workaround is to (1) close vscode, (2) `make clean`, (3) `make build` and (4) reopen vscode (`make edit`).*
 
